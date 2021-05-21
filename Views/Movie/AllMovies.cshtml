@@ -1,0 +1,66 @@
+﻿
+@model MVCDEMO2.Models.Movies
+    @using MVCDEMO2.Models
+@{
+    ViewBag.Title = "Test";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+
+
+<p>
+    This is a new page.
+    @using (Html.BeginForm("AllMovies", "Movie", FormMethod.Post))
+    {
+
+        var i = 0;
+
+        @Html.HiddenFor(m => m.EditIndex)
+        <table>
+
+            @for (i = 0; i < Model.Items.Count(); i++)
+            {
+            <tr>
+
+
+                @if (!Model.Items[i].IsEditable)
+                {
+
+                    @*@Model.Items[i].Id
+            @Model.Items[i].Title*@
+                    <td>@Html.HiddenFor(m => m.Items[i].Id)</td>
+
+                    <td>@Html.DisplayFor(m => m.Items[i].Title)</td>
+
+                    <td>@Html.DisplayFor(m => m.Items[i].Director)</td>
+                    <td>@Html.ActionLink("Edit", "MoviesEdit", new { id = Model.Items[i].Id })</td>
+                    <td>@Html.ActionLink("Delete", "MovieDelete", new { id = Model.Items[i].Id })</td>
+                    <td>@Html.ActionLink("Deetails", "MoviePage", new { id = Model.Items[i].Id })</td>
+
+                }
+                else
+                {
+                    <td>@Html.HiddenFor(m => m.Items[i].Id)</td>
+                    <td>@Html.TextBoxFor(m => m.Items[i].Title)</td>
+                    <td>@Html.TextBoxFor(m => m.Items[i].Director)</td>
+
+
+                    <td>
+                        <input type="submit" class="btn btn-link" value="update" name="update" />
+                        @Html.ActionLink("Cancel", "AllMovies", "Movie")
+                    </td>
+                }
+
+            </tr>
+            }
+        </table>
+        <input type="submit" value="Submit" />
+    }
+
+
+
+
+
+</p>

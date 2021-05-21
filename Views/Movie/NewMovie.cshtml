@@ -1,0 +1,21 @@
+﻿
+@model MVCDEMO2.Models.Movie
+@{
+    ViewBag.Title = "New Movie";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@using (Html.BeginForm("Newmovie", "Movie", FormMethod.Post))
+{
+    <h1>Title</h1>
+    @Html.TextBoxFor(m => m.Title)
+    <h2>Director</h2>
+    @Html.TextBoxFor(m => m.Director)
+    <input type="submit" class="btn btn-link" value="add" name="add" />
+    @Html.ActionLink("Cancel", "Moviepage", "Home")
+
+}
+
+

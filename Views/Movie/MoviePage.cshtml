@@ -1,0 +1,30 @@
+﻿
+@model MVCDEMO2.Models.Movie
+@{
+    ViewBag.Title = "Test";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@using (Html.BeginForm("MoviePage", "Home", FormMethod.Post))
+{
+    if (!Model.IsEditable)
+    {
+        @Html.HiddenFor(m => m.Id)
+        @Html.DisplayFor(m => m.Title)
+        @Html.DisplayFor(m => m.Director)
+        @Html.ActionLink("Edit", "MovieEdit", new { id = Model.Id })
+    }
+    else
+    {
+        @Html.HiddenFor(m => m.Id)
+        @Html.TextBoxFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Director)
+        <input type="submit" class="btn btn-link" value="update" name="update" />
+        @Html.ActionLink("Cancel", "Moviepage", "Home")
+
+    }
+
+
+}
